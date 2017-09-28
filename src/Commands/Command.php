@@ -24,6 +24,9 @@ class Command
     /** @var string */
     protected $recipient;
 
+    /** @var string */
+    protected $sender;
+
     /** @var array */
     protected $middleware = [];
 
@@ -41,12 +44,13 @@ class Command
      * @param string|null $recipient
      * @param string|null $driver
      */
-    public function __construct($pattern, $callback, $recipient = null, $driver = null)
+    public function __construct($pattern, $callback, $recipient = null, $driver = null, $sender = null)
     {
         $this->pattern = $pattern;
         $this->callback = $callback;
         $this->driver = $driver;
         $this->recipient = $recipient;
+        $this->sender = $sender;
     }
 
     /**
@@ -66,6 +70,10 @@ class Command
 
         if (isset($attributes['recipient'])) {
             $this->recipient($attributes['recipient']);
+        }
+
+        if (isset($attributes['sender'])) {
+            $this->sender($attributes['sender']);
         }
     }
 
@@ -130,6 +138,17 @@ class Command
     public function recipient($recipient)
     {
         $this->recipient = $recipient;
+
+        return $this;
+    }
+
+    /**
+     * @param $sender
+     * @return $this
+     */
+    public function sender($sender)
+    {
+        $this->sender = $sender;
 
         return $this;
     }

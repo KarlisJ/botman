@@ -32,6 +32,7 @@ class Matcher
     {
         return $this->isDriverValid($driver->getName(), $command->getDriver()) &&
             $this->isRecipientValid($message->getRecipient(), $command->getRecipient()) &&
+            $this->isSenderValid($message->getSender(), $command->getSender()) &&
             $this->isPatternValid($message, $answer, $command->getPattern(), $command->getMiddleware() + $middleware);
     }
 
@@ -92,6 +93,16 @@ class Matcher
     protected function isRecipientValid($givenRecipient, $allowedRecipient)
     {
         return $givenRecipient == $allowedRecipient || $allowedRecipient === null;
+    }
+
+    /**
+     * @param $givenSender
+     * @param $allowedSender
+     * @return bool
+     */
+    protected function isSenderValid($givenSender, $allowedSender)
+    {
+        return $givenSender == $allowedSender || $allowedSender === null;
     }
 
     /**
