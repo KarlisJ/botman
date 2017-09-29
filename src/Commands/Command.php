@@ -20,7 +20,7 @@ class Command
 
     /** @var string */
     protected $driver;
-composer require --dev phpunit/phpunit ^6.2
+
     /** @var string */
     protected $recipient;
 
